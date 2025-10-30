@@ -38,15 +38,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 20),
-                  ...question.answers.map(
+                  ...question.getShuffledAnswers().map(
                     (answer) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: AnswerButton(
-                        answer,
-                        () {
-                          
-                        } 
-                      ),
+                      child: AnswerButton(answer, () {}),
                     ),
                   ),
                 ],
