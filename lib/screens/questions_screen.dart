@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_app_1/screens/login_screen.dart';
+import 'package:flutter_app_1/data/questions.dart';
+import 'package:flutter_app_1/models/answer_button.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen(this.startQuiz, {super.key});
@@ -18,54 +18,41 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'The question... ',
-                  style: TextStyle(fontSize: 24, color: Colors.purple.shade800),
-                ),
-                SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll<Color>(Colors.red),
+        body: PageView.builder(
+          itemCount: questions.length,
+          itemBuilder: (context, index) {
+            final question = questions[index];
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    question.text,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.purple.shade800,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  child: Text('1', style: TextStyle(color: Colors.white)),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll<Color>(Colors.blue),
-                  ),
-                  child: Text('2', style: TextStyle(color: Colors.white)),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll<Color>(
-                      Colors.green,
+                  SizedBox(height: 20),
+                  ...question.answers.map(
+                    (answer) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: AnswerButton(
+                        answer,
+                        () {
+                          
+                        } 
+                      ),
                     ),
                   ),
-                  child: Text('3', style: TextStyle(color: Colors.white)),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll<Color>(
-                      const Color.fromARGB(255, 189, 38, 169),
-                    ),
-                  ),
-                  child: Text('4', style: TextStyle(color: Colors.white)),
-                ),
-              ],
-            ),
-          ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

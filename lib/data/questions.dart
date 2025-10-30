@@ -1,6 +1,6 @@
 import 'package:flutter_app_1/models/quiz_question.dart';
 
-// Respuestas: 1) B, 2) A, 3) C, 4) B, 5) C.
+
 
 const questions = [
   QuizQuestion(
