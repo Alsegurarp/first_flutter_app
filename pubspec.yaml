@@ -1,0 +1,23 @@
+name: flutter_app_1
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  # in order to declare images, it must be here
+  # should be like this:
+  assets:
+    - assets/images/quiz-logo.png ## declare the relative path to the images folder
