@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter_app_1/screens/quiz.dart';
-import 'package:flutter_app_1/screens/questions_screen.dart';
 
 final imagen = 'assets/images/quiz-logo.png';
 
@@ -38,12 +38,14 @@ class _LoginScreenState extends State<LoginScreen> {
               color: const Color.fromARGB(255, 207, 167, 255),
               size: 32,
             ),
-            label: const Text(
+            label: Text(
               'Start Quiz',
-              style: TextStyle(
-                fontSize: 24,
-                color: Color.fromARGB(255, 204, 161, 255),
-                height: 2,
+              style: GoogleFonts.lato(
+                textStyle: TextStyle(
+                  fontSize: 24,
+                  color: Color.fromARGB(255, 204, 161, 255),
+                  height: 2,
+                ),
               ),
             ),
           ),

@@ -11,6 +11,8 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   Widget? activeScreen; // Can be null - before the class renders
+  final List<String> selectedAnswers =
+      []; // list of strings - Answers that were chosen
 
   @override
   void initState() {
@@ -24,15 +26,27 @@ class _QuizState extends State<Quiz> {
     // After this, the rest of the things will run
   }
 
+  void onSelectAnswer(String answer) {
+    setState(() {
+      selectedAnswers.add(answer);
+      print('Answer selected: $answer');
+    });
+  }
+
   void switchScreen() {
     setState(() {
-      activeScreen = QuestionsScreen(startQuiz);
+      activeScreen = QuestionsScreen(startQuiz, onSelectAnswer, chooseAnswer);
     });
   }
 
   void startQuiz() {
     // Add your quiz start logic here
     print('Quiz started!');
+  }
+
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+    print(selectedAnswers);
   }
 
   @override
@@ -69,7 +83,11 @@ class _QuizState extends State<Quiz> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => QuestionsScreen(startQuiz),
+                          builder: (context) => QuestionsScreen(
+                            startQuiz,
+                            chooseAnswer,
+                            onSelectAnswer,
+                          ),
                         ),
                       );
                     },
