@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_1/data/questions.dart';
 import 'package:flutter_app_1/screens/login_screen.dart';
 import 'package:flutter_app_1/screens/questions_screen.dart';
+import 'package:flutter_app_1/screens/results_screen.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -11,8 +13,8 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   Widget? activeScreen; // Can be null - before the class renders
-  final List<String> selectedAnswers =
-      []; // list of strings - Answers that were chosen
+  final List<String> selectedAnswers = [];
+  // list of strings - Answers that were chosen
 
   @override
   void initState() {
@@ -35,7 +37,12 @@ class _QuizState extends State<Quiz> {
 
   void switchScreen() {
     setState(() {
-      activeScreen = QuestionsScreen(startQuiz, onSelectAnswer, chooseAnswer);
+      activeScreen = QuestionsScreen(
+        startQuiz,
+        onSelectAnswer,
+        chooseAnswer,
+        selectedAnswers: selectedAnswers, // Pass the list here
+      );
     });
   }
 
@@ -47,6 +54,13 @@ class _QuizState extends State<Quiz> {
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
     print(selectedAnswers);
+    if (selectedAnswers.length == questions.length) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ResultsScreen(selectedAnswers: selectedAnswers),
+        ),
+      );
+    }
   }
 
   @override
@@ -87,6 +101,8 @@ class _QuizState extends State<Quiz> {
                             startQuiz,
                             chooseAnswer,
                             onSelectAnswer,
+                            selectedAnswers:
+                                selectedAnswers, // Pass the list here
                           ),
                         ),
                       );
