@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_1/screens/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_app_1/data/questions.dart';
-
+import 'package:flutter_app_1/models/questions_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
   final List<String> selectedAnswers;
 
   const ResultsScreen({required this.selectedAnswers, super.key});
 
-// Map is a data type that should declare the types of values that will store
-  List<Map<String, Object>> getSummaryData(){
-
+  // Map is a data type that should declare the types of values that will store
+  List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
 
-    for(var i = 0; i < selectedAnswers.length; i++){
+    for (var i = 0; i < selectedAnswers.length; i++) {
       summary.add({
         'question_index': i,
         'question': questions[i].text,
@@ -25,9 +24,7 @@ class ResultsScreen extends StatelessWidget {
     // Setting the 1st answer as the right one
 
     return summary;
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -47,16 +44,7 @@ class ResultsScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 24),
               ),
               SizedBox(height: 20),
-              ListView.builder(
-                itemCount: selectedAnswers.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                      'Answer ${index + 1}: ${selectedAnswers[index]}',
-                    ),
-                  );
-                },
-              ),
+              QuestionsSummary(getSummaryData()),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
