@@ -28,6 +28,17 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final summaryData = getSummaryData();
+
+    final numberTotalQuestions = questions.length;
+    final numCorrectQuestions = summaryData.where((data) {
+      return data['user_answer'] == data['correct_answer'];
+    }).length;
+    // numCorrectQuestions is equal to summoning the data, and then
+    // comparing if user_answer is equal to correct answer, if passes
+    // then that's a true statement in the list, and where will create a list
+    // of the elements that passes - So it's a nice way to verify the answers
+
     return Scaffold(
       appBar: AppBar(title: const Text('Results')),
       body: SizedBox(
@@ -38,13 +49,14 @@ class ResultsScreen extends StatelessWidget {
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Respondiste X de Y preguntas',
+                'Respondiste $numCorrectQuestions de $numberTotalQuestions preguntas correctamente',
                 style: TextStyle(fontSize: 24),
               ),
               SizedBox(height: 20),
-              QuestionsSummary(getSummaryData()),
+              QuestionsSummary(summaryData),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
